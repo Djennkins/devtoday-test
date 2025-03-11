@@ -16,7 +16,6 @@ const RecipeDetail = () => {
     useEffect(() => {
         if (id) {
             const fetchRecipe = async () => {
-                console.log("fetchRecipe id", id);
                 try {
                     const response = await axios.get(`http://localhost:5000/api/recipes/${id}`);
                     setRecipe(response.data.recipe);

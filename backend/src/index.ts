@@ -14,6 +14,5 @@ app.use(cors());
 app.use('/api', recipeRoutes);
 
 app.listen(port, () => {
-    // console.log(process.env.RECIPE_API_BASE_URL);
     console.log(`Running on ${port}`);
 });
