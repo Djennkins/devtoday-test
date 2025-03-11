@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation'
 import axios from "axios";
 import {Recipe} from "../../../types/recipe";
+import Link from "next/link";
 
 const RecipeDetail = () => {
     const {id} = useParams<{ id: string }>()
@@ -37,8 +38,9 @@ const RecipeDetail = () => {
                 />
                 <div className="flex flex-col gap-2">
                     <h1 className='text-xl font-bold'>{recipe.strMeal}</h1>
+                    <div>Area: <Link href={`/?a=${recipe.strArea}`} className='underline'>{recipe.strArea}</Link></div>
                     <p>{recipe.strInstructions}</p>
-                    <p>Category: {recipe.strCategory}</p>
+                    <div>Category: <Link href={`/?c=${recipe.strCategory}`} className='underline'>{recipe.strCategory}</Link></div>
                     <p>Area: {recipe.strArea}</p>
                 </div>
             </div>
