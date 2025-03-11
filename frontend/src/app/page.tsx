@@ -82,7 +82,7 @@ const RecipeList = () => {
                                         className="w-full h-64 object-cover rounded-md mb-4"
                                     />
                                     <Button>
-                                        <Link href={}>
+                                        <Link href={`/recipes/${recipe.idMeal}`}>
                                             Get Recipe
                                         </Link>
                                     </Button>
