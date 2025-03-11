@@ -17,8 +17,10 @@ export const getAvailableRecipes = async (filterBy: string = '', filterValue: st
 
 export const getRecipeInfo = async (id: string) => {
     try {
-        const response = await axios.get(`${process.env.RECIPE_API_BASE_URL}/lookup.php?i=${id}`);
-        const recipe = response.data.meals[0];
+        const responseRecipe = await axios.get(`${process.env.RECIPE_API_BASE_URL}/lookup.php?i=${id}`);
+        const recipe = responseRecipe.data.meals[0];
+        const responseRecipesFromCategory = await axios.get(`${process.env.RECIPE_API_BASE_URL}/filter.php?c=${recipe.strCategory}`);
+        const recipesFromCategory = responseRecipesFromCategory.data.meals;
 
         const ingredients = [];
 
@@ -30,19 +32,20 @@ export const getRecipeInfo = async (id: string) => {
             }
         }
 
-        return  {
-            idMeal: recipe.idMeal,
-            strMeal: recipe.strMeal,
-            strCategory: recipe.strCategory,
-            strArea: recipe.strArea,
-            strInstructions: recipe.strInstructions,
-            strMealThumb: recipe.strMealThumb,
-            strTags: recipe.strTags,
-            strYoutube: recipe.strYoutube,
-            ingredients,
-            strImageSource: recipe.strImageSource,
+        return  {recipe: {
+                idMeal: recipe.idMeal,
+                strMeal: recipe.strMeal,
+                strCategory: recipe.strCategory,
+                strArea: recipe.strArea,
+                strInstructions: recipe.strInstructions,
+                strMealThumb: recipe.strMealThumb,
+                strTags: recipe.strTags,
+                strYoutube: recipe.strYoutube,
+                ingredients,
+                strImageSource: recipe.strImageSource,
+            },
+            recipesFromCategory
         };
-
     } catch (error) {
         console.error(error);
         return { error: 'Failed to fetch recipe information' };
