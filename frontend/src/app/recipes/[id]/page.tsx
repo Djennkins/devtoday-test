@@ -37,11 +37,17 @@ const RecipeDetail = () => {
                     className="w-64 h-64 object-cover rounded-md mb-4"
                 />
                 <div className="flex flex-col gap-2">
-                    <h1 className='text-xl font-bold'>{recipe.strMeal}</h1>
+                    <h1 className='text-xl font-bold text-center'>{recipe.strMeal}</h1>
                     <div>Area: <Link href={`/?a=${recipe.strArea}`} className='underline'>{recipe.strArea}</Link></div>
-                    <p>{recipe.strInstructions}</p>
-                    <div>Category: <Link href={`/?c=${recipe.strCategory}`} className='underline'>{recipe.strCategory}</Link></div>
-                    <p>Area: {recipe.strArea}</p>
+                    <div dangerouslySetInnerHTML={{__html: recipe.strInstructions.replace(/\r\n/g, '<br />')}}/>
+                    <div>
+                        <h2>Ingredients:</h2>
+
+                    </div>
+                    
+                    <div>
+                        Category: <Link href={`/?c=${recipe.strCategory}`} className='underline'>{recipe.strCategory}</Link>
+                    </div>
                 </div>
             </div>
         </div>
