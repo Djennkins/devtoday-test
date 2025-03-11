@@ -1,9 +1,14 @@
 import axios from 'axios';
 
-export const getAvailableRecipes = async (filter: string = '') => {
+export const getAvailableRecipes = async (filterBy: string = '', filterValue: string = '') => {
     try {
-        const response = await axios.get(`${process.env.RECIPE_API_BASE_URL}/search.php?s=${filter}`);
-        return response.data;
+        console.log('filterBy', filterBy, 'filterValue', filterValue);
+        if (filterBy !== '' && filterValue !== '') {
+            const response = await axios.get(`${process.env.RECIPE_API_BASE_URL}/filter.php?${filterBy}=${filterValue}`);
+            return response.data;
+        }
+        const response = await axios.get(`${process.env.RECIPE_API_BASE_URL}/search.php?s=`);
+        return response.data
     } catch (error) {
         console.error(error);
         return { error: 'Failed to fetch recipes' };

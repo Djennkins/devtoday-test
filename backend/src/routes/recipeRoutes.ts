@@ -4,8 +4,9 @@ import {getAvailableRecipes, getRecipeInfo} from "../controllers/recipeControlle
 const router = Router();
 
 router.get('/recipes', async (req, res) => {
-    const filter = req.query.filter?.toString() || '';
-    const data = await getAvailableRecipes(filter);
+    const filterBy = req.query.filterBy?.toString() || '';
+    const filterValue = req.query.filterValue?.toString() || '';
+    const data = await getAvailableRecipes(filterBy, filterValue);
     res.json(data);
 })
 
