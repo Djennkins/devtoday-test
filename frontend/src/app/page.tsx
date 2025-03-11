@@ -7,11 +7,12 @@ import {Input} from '@/components/ui/input';
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import axios from "axios";
 import Link from "next/link";
+import {Recipe} from "@/types/recipe";
 
 const RecipeList = () => {
     const [selectedFilter, setSelectedFilter] = useState ("all");
     const [searchTerm, setSearchTerm] = useState("");
-    const [recipes, setRecipes] = useState<any>();
+    const [recipes, setRecipes] = useState<Recipe[]>();
 
     const fetchRecipes = async (filter: string, search?: string) => {
         let url = 'http://localhost:5000/api/recipes';
