@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation'
 import axios from "axios";
-import {Recipe} from "../../../types/recipe";
+import {RecipeInterface} from "../../../types/recipe";
 import Link from "next/link";
 
 const RecipeDetail = () => {
     const {id} = useParams<{ id: string }>()
-    const [recipe, setRecipe] = useState<Recipe | null>(null);
+    const [recipe, setRecipe] = useState<RecipeInterface | null>(null);
 
     useEffect(() => {
         if (id) {
@@ -16,7 +16,7 @@ const RecipeDetail = () => {
                 console.log("fetchRecipe id", id);
                 try {
                     const response = await axios.get(`http://localhost:5000/api/recipes/${id}`);
-                    setRecipe(response.data.meals[0]);
+                    setRecipe(response.data);
                 } catch (error) {
                     console.error("Error fetching recipe:", error);
                 }
@@ -42,9 +42,16 @@ const RecipeDetail = () => {
                     <div dangerouslySetInnerHTML={{__html: recipe.strInstructions.replace(/\r\n/g, '<br />')}}/>
                     <div>
                         <h2>Ingredients:</h2>
-
+                        <ul>
+                            {recipe.ingredients.map((ingredientItem) => (
+                                <li>
+                                    <Link href={`/?i=${ingredientItem.ingredient}`}>
+                                        {ingredientItem.ingredient}
+                                    </Link> - {ingredientItem.measure}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    
                     <div>
                         Category: <Link href={`/?c=${recipe.strCategory}`} className='underline'>{recipe.strCategory}</Link>
                     </div>
