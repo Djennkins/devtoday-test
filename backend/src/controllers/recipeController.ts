@@ -11,7 +11,7 @@ export const getAvailableRecipes = async (filterBy: string = '', filterValue: st
         return response.data
     } catch (error) {
         console.error(error);
-        return { error: 'Failed to fetch recipes' };
+        return {error: 'Failed to fetch recipes'};
     }
 };
 
@@ -28,11 +28,12 @@ export const getRecipeInfo = async (id: string) => {
             const ingredient = recipe[`strIngredient${i}`];
             const measure = recipe[`strMeasure${i}`];
             if (ingredient && ingredient.trim() && measure) {
-                ingredients.push({ ingredient, measure });
+                ingredients.push({ingredient, measure});
             }
         }
 
-        return  {recipe: {
+        return {
+            recipe: {
                 idMeal: recipe.idMeal,
                 strMeal: recipe.strMeal,
                 strCategory: recipe.strCategory,
@@ -48,6 +49,6 @@ export const getRecipeInfo = async (id: string) => {
         };
     } catch (error) {
         console.error(error);
-        return { error: 'Failed to fetch recipe information' };
+        return {error: 'Failed to fetch recipe information'};
     }
 };

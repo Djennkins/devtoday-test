@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import {getAvailableRecipes, getRecipeInfo} from "../controllers/recipeController";
 
 const router = Router();
@@ -11,7 +11,7 @@ router.get('/recipes', async (req, res) => {
 })
 
 router.get('/recipes/:id', async (req, res) => {
-    const { id } = req.params;
+    const {id} = req.params;
     const data = await getRecipeInfo(id);
     res.json(data);
 });
