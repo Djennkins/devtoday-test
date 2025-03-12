@@ -1,21 +1,20 @@
 'use client'
 
-import { useEffect, useState} from "react";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {useEffect, useState} from "react";
+import {Button} from "@/components/ui/button";
+import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Input} from '@/components/ui/input';
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import axios from "axios";
 import Link from "next/link";
 import {RecipeInterface} from "@/types/recipe";
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from "next/navigation";
+import {useRouter, useSearchParams} from 'next/navigation'
 
 const RecipeList = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [selectedFilter, setSelectedFilter] = useState ("all");
+    const [selectedFilter, setSelectedFilter] = useState("all");
     const [searchTerm, setSearchTerm] = useState("");
     const [recipes, setRecipes] = useState<RecipeInterface[]>([]);
 
@@ -28,12 +27,11 @@ const RecipeList = () => {
 
         try {
             const response = await axios.get(url);
-            if(!Array.isArray(response.data.meals)) {
+            if (!Array.isArray(response.data.meals)) {
                 return setRecipes([]);
             }
             return setRecipes(response.data.meals);
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
         }
     }
@@ -62,7 +60,7 @@ const RecipeList = () => {
                 }}>
                     <TabsList className="w-full flex justify-center gap-2">
                         <TabsTrigger value="all" onClick={() => router.push("/")}>
-                                All
+                            All
                         </TabsTrigger>
                         <TabsTrigger value="i">Ingredient</TabsTrigger>
                         <TabsTrigger value="c">Category</TabsTrigger>

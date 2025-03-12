@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { useParams } from 'next/navigation'
+import {useEffect, useState} from "react";
+import {useParams} from 'next/navigation'
 import axios from "axios";
 import {RecipeInterface, RecipeListItem} from "../../../types/recipe";
 import Link from "next/link";
